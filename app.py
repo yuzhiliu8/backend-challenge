@@ -12,7 +12,7 @@ from models import *
 
 @app.route("/")
 def main():
-    return "Welcome to Penn Club Review!"
+    return "Welcome Penn Club Review!"
 
 
 @app.route("/api")
@@ -21,4 +21,4 @@ def api():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
