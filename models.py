@@ -25,6 +25,7 @@ class Club(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     code: Mapped[str] = mapped_column(String, unique=True)
     name: Mapped[str] = mapped_column(String, unique=True)
+    description: Mapped[str] = mapped_column(String)
     tags: Mapped[list[Tag]] = relationship(secondary=club_to_tag_table)
 
 

@@ -21,12 +21,13 @@ def load_data(): # need app context
         for tag in club['tags']:
             if tag not in tag_map: #create new tag row if not previously encountered
                 tag_map[tag] = Tag(name=tag)
-            else: # if tag already exists, use it
-                tag_list.append(tag_map[tag])
+
+            tag_list.append(tag_map[tag])
 
         c = Club(
             code = club['code'],
             name = club['name'],
+            description = club['description'],
             tags = tag_list
         )
         db.session.add(c)
