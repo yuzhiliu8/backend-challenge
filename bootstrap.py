@@ -1,15 +1,33 @@
 import os
 from app import app, db, DB_FILE
-from models import *
+from models.club import Club, Tag
+from models.user import User
 import json
 
 
 
-def create_user():
-    print("TODO: Create a user called josh")
-    
+def create_user(): # need app context
+    print("Creating josh")
+    josh = User(
+        name = "Josh",
+        username = "joshy",
+        email = "josh@joshmail.com",
+        phone = "111-111-1111",
+        major = "Computer Science",
+        year = 1,
+        clubs = []
+    )
+
+    club_codes = ['pppp', 'locustlabs']
+    stmt = db.select(Club).where(Club.code.in_(club_codes))
+    for row in db.session.execute(stmt):
+        josh.clubs.append(row.Club)
+
+    db.session.add(josh)
+    db.session.commit()
 
 def load_data(): # need app context
+    print("Loading clubs.json...")
     with open('./clubs.json', 'r') as data_file:
         clubs = json.load(data_file)
 
@@ -31,9 +49,7 @@ def load_data(): # need app context
             tags = tag_list
         )
         db.session.add(c)
-    
     db.session.commit()
-    # print("TODO: Load in clubs.json to the database.")
 
 
 # No need to modify the below code.
@@ -54,7 +70,7 @@ if __name__ == "__main__":
 
     with app.app_context():
         db.create_all()
-        create_user()
         load_data()
+        create_user()
         # db.session.add(c)
         # db.session.commit()
