@@ -23,8 +23,12 @@ class Club(db.Model):
 
     def dto_dict(self):
         return {
+            "id": self.id,
             "code": self.code,
             "name": self.name,
             "description": self.description,
             "fav_count": self.fav_count
         }
+
+    def __str__(self):
+        return f'{self.dto_dict()}'

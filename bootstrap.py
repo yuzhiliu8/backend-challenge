@@ -4,8 +4,6 @@ from models.club import Club, Tag
 from models.user import User
 import json
 
-
-
 def create_user(): # need app context
     print("Creating josh")
     josh = User(
@@ -32,16 +30,13 @@ def load_data(): # need app context
         clubs = json.load(data_file)
 
     tag_map = {}
-
     for club in clubs:
-
         tag_list: list[Tag] = []
         for tag in club['tags']:
             if tag not in tag_map: #create new tag row if not previously encountered
                 tag_map[tag] = Tag(name=tag)
 
             tag_list.append(tag_map[tag])
-
         c = Club(
             code = club['code'],
             name = club['name'],

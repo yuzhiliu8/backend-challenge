@@ -9,15 +9,15 @@ from sqlalchemy import ForeignKey, Table
 club_to_tag_table = Table(
     "club_to_tag",
     db.metadata,
-    db.Column("club_id", ForeignKey("clubs.id")),
-    db.Column("tag_id", ForeignKey("tags.id"))
+    db.Column("club_name", ForeignKey("clubs.name")),
+    db.Column("tag_name", ForeignKey("tags.name"))
 )
 
 club_to_user_table = Table(
     "club_to_user",
     db.metadata,
-    db.Column("user_id", ForeignKey("users.id")),
-    db.Column("club_id", ForeignKey("clubs.id"))
+    db.Column("user_username", ForeignKey("users.username")),
+    db.Column("club_name", ForeignKey("clubs.name"))
 )
 
 

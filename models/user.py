@@ -16,16 +16,22 @@ class User(db.Model):
     phone: Mapped[str] = mapped_column(String)
     major: Mapped[str] = mapped_column(String)
     year: Mapped[int] = mapped_column(Integer)
+    fav_club_name: Mapped[str] = mapped_column(String, server_default="")
 
     clubs: Mapped[list[Club]] = relationship(secondary=club_to_user_table)
 
     def dto_dict(self):       # Data transfer object
         return {
+            "id": self.id,
             "name": self.name,
             "username": self.username,
             "email": self.email,
             "phone": self.phone,
             "major": self.major,
-            "year": self.year
+            "year": self.year,
+            "fav_club_name": self.fav_club_name
         }
+    
+    def __str__(self):
+        return f'{self.dto_dict()}'
 
